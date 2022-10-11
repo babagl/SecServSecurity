@@ -11,4 +11,6 @@ public interface AccountService {
     void addRoleToUser(String username, String roleName);
     AppUser loadUserByUsername(String username);
     List<AppUser> listUsers();
+
+    List<AppRole> listRoles();
 }
