@@ -2,6 +2,7 @@ package com.spring.secservsecurity.security;
 
 import com.spring.secservsecurity.Entity.AppUser;
 import com.spring.secservsecurity.filter.JwtAuthenticationFilter;
+import com.spring.secservsecurity.filter.JwtAutorisationFilter;
 import com.spring.secservsecurity.service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -18,6 +19,7 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -53,6 +55,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         //http.formLogin();
         http.authorizeRequests().anyRequest().authenticated();
         http.addFilter(new JwtAuthenticationFilter(authenticationManagerBean()));
+        http.addFilterBefore(new JwtAutorisationFilter(), UsernamePasswordAuthenticationFilter.class);
     }
 
     @Bean
